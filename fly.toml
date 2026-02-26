@@ -1,23 +1,26 @@
-# Run `fly launch --no-deploy` once locally to create the app and replace
-# the placeholder name below with the one Fly assigns (or pick your own).
-app = "self-serve-x64-wasm"
-primary_region = "ams"
+# fly.toml app configuration file generated for self-serve-x64-wasm on 2026-02-26T20:43:49+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'self-serve-x64-wasm'
+primary_region = 'ams'
 
 [build]
-  dockerfile = "Dockerfile"
+  dockerfile = 'Dockerfile'
 
 [env]
-  PORT = "8080"
+  PORT = '8080'
 
 [http_service]
   internal_port = 8080
-  force_https   = true
-  # Keep one machine alive at all times so /proc/self/exe is always accessible.
-  auto_stop_machines    = false
-  auto_start_machines   = true
-  min_machines_running  = 1
+  force_https = true
+  auto_stop_machines = 'off'
+  auto_start_machines = true
+  min_machines_running = 1
 
 [[vm]]
-  cpu_kind = "shared"
-  cpus     = 1
-  memory   = "256mb"
+  memory = '256mb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 256
