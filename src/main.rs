@@ -239,7 +239,9 @@ async fn main() -> std::io::Result<()> {
     let state = Arc::new(Mutex::new(State { counter: 0 }));
     let ctx = ServerContext { transpiler, state };
 
-    println!("\nListening on http://0.0.0.0:{}", port);
+    let host = if std::env::var("FLY_APP_NAME").is_ok() { "0.0.0.0" } else { "127.0.0.1" };
+
+    println!("\nListening on http://{}:{}", host, port);
 
     HttpServer::new(move || {
         App::new()
@@ -248,7 +250,7 @@ async fn main() -> std::io::Result<()> {
             .route("/wasm/{fn_name}", web::get().to(get_wasm))
             .route("/execute/{fn_name}", web::post().to(execute_callback))
     })
-    .bind(("0.0.0.0", port))?
+    .bind((host, port))?
     .run()
     .await
 }
