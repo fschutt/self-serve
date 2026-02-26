@@ -239,7 +239,7 @@ async fn main() -> std::io::Result<()> {
     let state = Arc::new(Mutex::new(State { counter: 0 }));
     let ctx = ServerContext { transpiler, state };
 
-    println!("\nListening on http://127.0.0.1:{}", port);
+    println!("\nListening on http://0.0.0.0:{}", port);
 
     HttpServer::new(move || {
         App::new()
@@ -248,7 +248,7 @@ async fn main() -> std::io::Result<()> {
             .route("/wasm/{fn_name}", web::get().to(get_wasm))
             .route("/execute/{fn_name}", web::post().to(execute_callback))
     })
-    .bind(("127.0.0.1", port))?
+    .bind(("0.0.0.0", port))?
     .run()
     .await
 }
