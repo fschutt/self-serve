@@ -3,6 +3,14 @@ name = "x64_to_wasm_server"
 version = "0.1.0"
 edition = "2021"
 
+[[bin]]
+name = "x64_to_wasm_server"
+path = "src/main.rs"
+
+[[bin]]
+name = "trace"
+path = "src/trace.rs"
+
 [dependencies]
 actix-web = "4.9"
 actix-rt = "2.10"
